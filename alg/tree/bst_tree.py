@@ -15,7 +15,7 @@ class Node:
       return 0
     return -1 if self.data < other.data else 1
 
-class BstTree:
+class Tree:
 
   def __init__(self, root = None, size = 0):
     self.root = root

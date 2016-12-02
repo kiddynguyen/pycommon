@@ -1,5 +1,5 @@
 #!/usr/bin/python -tt
-import common
+import random
 
 def swap(list, i, j):
   list[i] += list[j]
@@ -35,6 +35,13 @@ def heapsort(list):
   return
 
 def main():
+  list = []
+  for i in range(20):
+    list.append(random.randrange(100))
+
+  print list
+  build_heap(list)
+  print list
   return
 
 if __name__ == '__main__':

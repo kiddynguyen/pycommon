@@ -1,9 +1,9 @@
 #!/usr/bin/python -tt
-from bst_tree import BstTree
+from bst_tree import Tree
 from bst_tree import Node
 
 def main():
-  tree = BstTree()  
+  tree = Tree()  
   tree.insert(5)
   tree.insert(2)
   tree.insert(10)
