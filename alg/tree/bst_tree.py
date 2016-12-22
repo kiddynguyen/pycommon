@@ -2,18 +2,18 @@
 
 class Node:
 
-  def __init__(self, data = None, left = None, right = None):
-    self.data = data
+  def __init__(self, key = None, left = None, right = None):
+    self.key = key
     self.left = left
     self.right = right
 
   def __str__(self):
-    return str(self.data)
+    return str(self.key)
 
   def __cmp__(self, other):
-    if self.data == other.data:
+    if self.key == other.key:
       return 0
-    return -1 if self.data < other.data else 1
+    return -1 if self.key < other.key else 1
 
 class Tree:
 
@@ -21,6 +21,7 @@ class Tree:
     self.root = root
     self.size = size
 
+  ## calculate height recursively on node
   def __height(self, node):
     if node is None:
       return 0
@@ -28,9 +29,11 @@ class Tree:
     hright = self.__height(node.right)
     return hleft + 1 if hleft > hright else hright + 1
 
+  ## calculate height of tree
   def height(self):
     return self.__height(self.root)
 
+  ## count leaves recursively on node
   def __leaves(self, node):
     if node is None:
       return 0
@@ -38,42 +41,47 @@ class Tree:
       return 1
     return self.__leaves(node.left) + self.__leaves(node.right)
 
+  ## count leaves of tree
   def leaves(self):
     return self.__leaves(self.root)
 
-  def __search(self, node, data):
+  ## search a key recursively on node
+  def __search(self, node, key):
     if node is None:
       return False
-    if node.data == data:
+    if node.key == key:
       return True
-    elif data < node.data:
-      return self.__search(node.left, data)
+    elif key < node.key:
+      return self.__search(node.left, key)
     else:
-      return self.__search(node.right, data)
+      return self.__search(node.right, key)
 
-  def search(self, data):
-    return self.__search(self.root, data)
+  ## search a key
+  def search(self, key):
+    return self.__search(self.root, key)
 
-  def __insert(self, node, data):
-    if data <= node.data:
+  ## insert a node recursive on node
+  def __insert(self, node, key):
+    if key <= node.key:
       if node.left is None:
-        node.left = Node(data)
+        node.left = Node(key)
       else:
-        self.__insert(node.left, data)
+        self.__insert(node.left, key)
     else:
       if node.right is None:
-        node.right = Node(data)
+        node.right = Node(key)
       else:
-        self.__insert(node.right, data)
+        self.__insert(node.right, key)
 
-  def insert(self, data):
+  ## insert node to tree
+  def insert(self, key):
     if self.root is None:
-      self.root = Node(data)
+      self.root = Node(key)
       return
-    self.__insert(self.root, data)
+    self.__insert(self.root, key)
     self.size += 1
 
-  def remove(self, data):
+  def remove(self, key):
     return None
 
   ## private method
@@ -81,11 +89,12 @@ class Tree:
     if node is None:
       return
     self.__inorder_traverse(node.left)
-    print node
+    print node,
     self.__inorder_traverse(node.right)
   
   def inorder_traverse(self):
     self.__inorder_traverse(self.root)
+    print
     
   ## private method
   def __preorder_traverse(self, node):
@@ -95,5 +104,39 @@ class Tree:
     self.__preorder_traverse(node.left)
     self.__preorder_traverse(node.right)
 
+  ## print tree level by level in one line
+  def bf_traverse(self):
+    queue = [self.root]
+    while len(queue) > 0:
+      node = queue.pop(0)
+      if node.left:
+        queue.append(node.left)
+      if node.right:
+        queue.append(node.right)
+      print node,
+    print
+
+  ## print tree level by level
+  ## new line for each level
+  def bf_traverse2(self):
+    curlevel = [self.root]
+    nextlevel = []
+    while len(curlevel) > 0:
+      node = curlevel.pop(0)
+      print node,
+      if node.left:
+        nextlevel.append(node.left)
+      if node.right:
+        nextlevel.append(node.right)
+      # start new level
+      if len(curlevel) == 0:
+        curlevel = nextlevel
+        nextlevel = []
+        print
+
   def print_visual(self):
     print 'TODO'
+
+
+
+

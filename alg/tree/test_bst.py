@@ -13,6 +13,8 @@ def main():
   tree.insert(50)
   tree.insert(-1)
   tree.inorder_traverse()
+  tree.bf_traverse()
+  tree.bf_traverse2()
  
 if __name__ == '__main__':
   main()

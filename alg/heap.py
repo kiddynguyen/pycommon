@@ -29,11 +29,6 @@ def build_heap(list):
     heapify(list, i)
     i -= 1
 
-def heapsort(list):
-  build_heap(list)
-  
-  return
-
 def main():
   list = []
   for i in range(20):
